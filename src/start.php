@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Console\Application;
+use BigElephant\XfConsole\Application;
 
 $application = new Application('XenForo Developer', '0.1');
 
