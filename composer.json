@@ -1,0 +1,22 @@
+{
+    "name": "bigelephant/xf-console",
+    "keywords": ["xenforo"],
+    "authors": [
+        {
+            "name": "Robbo",
+            "email": "robert@mercenarydesign.net"
+        }
+    ],
+    "require": {
+        "symfony/console": "2.2.*"
+    },
+    "require-dev": {
+        "mockery/mockery": "0.7.2"
+    },
+    "autoload": {
+        "psr-0": {
+            "BigElephant\\XfConsole": "src/"
+        }
+    },
+    "minimum-stability": "dev"
+}

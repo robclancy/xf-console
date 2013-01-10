@@ -1,9 +1,15 @@
 <?php namespace BigElephant\XfConsole;
 
-class Application {
+class Application extends \Symfony\Component\Console\Application {
 
-	public function run()
+	/**
+	 * Start a new Console application.
+	 * Done here like this incase of more logic in future.
+	 *
+	 * @return BigElephant\XF-Console\Application
+	 */
+	public static function start()
 	{
-		return 'Run forest run!';
+		return require __DIR__.'/../../start.php';
 	}
 }
