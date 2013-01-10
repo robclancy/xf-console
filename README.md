@@ -1,4 +1,4 @@
-xf-console
+XenForo Console
 ==========
 
-Console for working with XenForo
+Console component for working with XenForo.
