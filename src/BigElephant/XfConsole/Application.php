@@ -21,7 +21,7 @@ class Application extends App {
 	 *
 	 * @return BigElephant\XF-Console\Application
 	 */
-	public static function start()
+	public static function start($app)
 	{
 		return require __DIR__.'/../../start.php';
 	}
