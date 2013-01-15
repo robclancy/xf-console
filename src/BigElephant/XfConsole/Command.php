@@ -31,7 +31,7 @@ class Command extends BaseCommand {
 	 */
 	public function write($string, $verbosity = 1)
 	{
-		if ($this->getVerbosity() >= $verbosiry)
+		if ($this->getVerbosity() >= $verbosity)
 		{
 			$this->output->write($string);
 		}
@@ -46,7 +46,7 @@ class Command extends BaseCommand {
 	 */
 	protected function line($string, $verbosity = 1)
 	{
-		if ($this->getVerbosity() >= $verbosiry)
+		if ($this->getVerbosity() >= $verbosity)
 		{
 			parent::line($string);
 		}
@@ -61,7 +61,7 @@ class Command extends BaseCommand {
 	 */
 	protected function info($string, $verbosity = 1)
 	{
-		if ($this->getVerbosity() >= $verbosiry)
+		if ($this->getVerbosity() >= $verbosity)
 		{
 			parent::info($string);
 		}
@@ -76,7 +76,7 @@ class Command extends BaseCommand {
 	 */
 	protected function comment($string, $verbosity = 1)
 	{
-		if ($this->getVerbosity() >= $verbosiry)
+		if ($this->getVerbosity() >= $verbosity)
 		{
 			parent::comment($string);
 		}
@@ -91,7 +91,7 @@ class Command extends BaseCommand {
 	 */
 	protected function question($string, $verbosity = 1)
 	{
-		if ($this->getVerbosity() >= $verbosiry)
+		if ($this->getVerbosity() >= $verbosity)
 		{
 			parent::question($string);
 		}
