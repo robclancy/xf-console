@@ -12,6 +12,16 @@ class Command extends BaseCommand {
 	 */
 	protected $container;
 
+	/** 
+	 * Wrapper for $this->output->getVerbosity()
+	 *
+	 * @return int
+	**/
+	public function getVerbosity()
+	{
+		return $this->output->getVerbosity();
+	}
+
 	/**
 	 * Write string as standard output without a new line at the end.
 	 *
