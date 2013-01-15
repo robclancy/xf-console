@@ -13,6 +13,21 @@ class Command extends BaseCommand {
 	protected $container;
 
 	/**
+	 * Write string as standard output without a new line at the end.
+	 *
+	 * @param  string  $string
+	 * @param  int 	   $verbosity
+	 * @return void
+	 */
+	public function write($string, $verbosity = 1)
+	{
+		if ($this->getVerbosity() >= $verbosiry)
+		{
+			$this->output->write($string);
+		}
+	}
+
+	/**
 	 * Write a string as standard output.
 	 *
 	 * @param  string  $string
