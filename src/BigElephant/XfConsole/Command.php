@@ -95,7 +95,7 @@ class Command extends BaseCommand {
 	 * @param  Illuminate\Container\Container $container
 	 * @return void
 	 */
-	public function setLaravel(Container $container)
+	public function setLaravel($container)
 	{
 		$this->container = $container;
 		parent::setLaravel($container);

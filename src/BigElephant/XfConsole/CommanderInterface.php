@@ -1,6 +1,6 @@
 <?php namespace BigElephant\XfConsole;
 
-use BigElephant\Console\Application as ConsoleApp;
+use BigElephant\XfConsole\Application as ConsoleApp;
 
 interface CommanderInterface {
 
