@@ -45,7 +45,7 @@ class Application extends App {
 		$posibilities = array(
 			'/config.php' => '/',
 			'/library/config.php' => '/library/',
-			'/../library/config.php' => '/../',
+			'/../library/config.php' => '/../library/',
 		);
 
 		foreach ($posibilities AS $try => $path)
