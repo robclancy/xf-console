@@ -1,4 +1,4 @@
-<?php namespace BigElephant\Console;
+<?php namespace BigElephant\XfConsole;
 
 use BigElephant\Console\Application as ConsoleApp;
 
