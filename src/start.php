@@ -2,7 +2,7 @@
 
 use BigElephant\XfConsole\Application;
 use Illuminate\Container\Container;
-use Symfony\Component\Console\Output\ConsoleOutput
+use Symfony\Component\Console\Output\ConsoleOutput;
 
 $application = new Application(new Container);
 
