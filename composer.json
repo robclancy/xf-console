@@ -8,8 +8,8 @@
         }
     ],
     "require": {
-        "illuminate/container": "4.0.*-dev",
-        "illuminate/console": "4.0.*-dev"
+        "illuminate/container": "4.0.x",
+        "illuminate/console": "4.0.x"
     },
     "autoload": {
         "psr-0": {

@@ -106,7 +106,7 @@ class Command extends BaseCommand {
 	 */
 	protected function error($string, $verbosity = 1)
 	{
-		if ($this->getVerbosity() >= $verbosiry)
+		if ($this->getVerbosity() >= $verbosity)
 		{
 			parent::error($string);
 		}
