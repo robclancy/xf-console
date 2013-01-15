@@ -1,262 +1,103 @@
 <?php namespace BigElephant\XfConsole;
 
-use Symfony\Component\Console\Input\ArrayInput;
-use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Output\OutputInterface;
+use Illuminate\Console\Command as BaseCommand;
+use Illuminate\Container\Container;
 
-/*	
- * Most of this is from the Illuminate/Console component.
- */
-
-class Command extends \Symfony\Component\Console\Command\Command {
+class Command extends BaseCommand {
 
 	/**
-	 * The input interface implementation.
+	 * The the container instance.
 	 *
-	 * @var Symfony\Component\Console\Input\InputInterface
+	 * @var Illuminate\Container\Container
 	 */
-	protected $input;
-
-	/**
-	 * The output interface implementation.
-	 *
-	 * @var Symfony\Component\Console\Output\OutputInterface
-	 */
-	protected $output;
-
-	/**
-	 * The console command name.
-	 *
-	 * @var string
-	 */
-	protected $name;
-
-	/**
-	 * The console command description.
-	 *
-	 * @var string
-	 */
-	protected $description;
-
-	/**
-	 * Create a new console command instance.
-	 *
-	 * @return void
-	 */
-	public function __construct()
-	{
-		parent::__construct($this->name);
-
-		// We will go ahead and set the name, description, and parameters on console
-		// commands just to make things a little easier on the developer. This is
-		// so they don't have to all be manually specified in the constructors.
-		$this->setDescription($this->description);
-
-		$this->specifyParameters();
-	}
-
-	/**
-	 * Specify the arguments and options on the command.
-	 *
-	 * @return void
-	 */
-	protected function specifyParameters()
-	{
-		// We will loop through all of the arguments and options for the command and
-		// set them all on the base command instance. This specifies what can get
-		// passed into these commands as "parameters" to control the execution.
-		foreach ($this->getArguments() as $arguments)
-		{
-			call_user_func_array(array($this, 'addArgument'), $arguments);
-		}
-
-		foreach ($this->getOptions() as $options)
-		{
-			call_user_func_array(array($this, 'addOption'), $options);
-		}
-	}
-
-	/**
-	 * Run the console command.
-	 *
-	 * @param  Symfony\Component\Console\Input\InputInterface  $input
-	 * @param  Symfony\Component\Console\Output\OutputInterface  $output
-	 * @return mixed
-	 */
-	public function run(InputInterface $input, OutputInterface $output)
-	{
-		$this->input = $input;
-
-		$this->output = $output;
-
-		return parent::run($input, $output);
-	}
-
-	/**
-	 * Execute the console command.
-	 *
-	 * @param  Symfony\Component\Console\Input\InputInterface  $input
-	 * @param  Symfony\Component\Console\Output\OutputInterface  $output
-	 * @return mixed
-	 */
-	protected function execute(InputInterface $input, OutputInterface $output)
-	{
-		return $this->fire();
-	}
-
-	/**
-	 * Call another console command.
-	 *
-	 * @param  string  $command
-	 * @param  array   $arguments
-	 * @return mixed
-	 */
-	public function call($command, array $arguments = array())
-	{
-		$instance = $this->getApplication()->find($command);
-
-		$arguments['command'] = $command;
-
-		return $instance->run(new ArrayInput($arguments), $this->output);
-	}
-
-	/**
-	 * Get the value of a command argument.
-	 *
-	 * @param  string  $key
-	 * @return string|array
-	 */
-	protected function argument($key = null)
-	{
-		if (is_null($key)) return $this->input->getArguments();
-
-		return $this->input->getArgument($key);
-	}
-
-	/**
-	 * Get the value of a command option.
-	 *
-	 * @param  string  $key
-	 * @return string|array
-	 */
-	protected function option($key = null)
-	{
-		if (is_null($key)) return $this->input->getOptions();
-
-		return $this->input->getOption($key);
-	}
-
-	/**
-	 * Confirm a question with the user.
-	 *
-	 * @param  string  $question
-	 * @param  bool    $default
-	 * @return bool
-	 */
-	protected function confirm($question, $default = true)
-	{
-		$dialog = $this->getHelperSet()->get('dialog');
-
-		return $dialog->askConfirmation($this->output, "<question>$question</question>", $default);
-	}
-
-	/**
-	 * Prompt the user for input.
-	 *
-	 * @param  string  $question
-	 * @param  string  $default
-	 * @return string
-	 */
-	protected function ask($question, $default = null)
-	{
-		$dialog = $this->getHelperSet()->get('dialog');
-
-		return $dialog->ask($this->output, "<question>$question</question>", $default);
-	}
+	protected $container;
 
 	/**
 	 * Write a string as standard output.
 	 *
 	 * @param  string  $string
+	 * @param  int 	   $verbosity
 	 * @return void
 	 */
-	protected function line($string)
+	protected function line($string, $verbosity = 1)
 	{
-		$this->output->writeln($string);
+		if ($this->getVerbosity() >= $verbosiry)
+		{
+			parent::line($string);
+		}
 	}
 
 	/**
 	 * Write a string as information output.
 	 *
 	 * @param  string  $string
+	 * @param  int 	   $verbosity
 	 * @return void
 	 */
-	protected function info($string)
+	protected function info($string, $verbosity = 1)
 	{
-		$this->output->writeln("<info>$string</info>");
+		if ($this->getVerbosity() >= $verbosiry)
+		{
+			parent::info($string);
+		}
 	}
 
 	/**
 	 * Write a string as comment output.
 	 *
 	 * @param  string  $string
+	 * @param  int 	   $verbosity
 	 * @return void
 	 */
-	protected function comment($string)
+	protected function comment($string, $verbosity = 1)
 	{
-		$this->output->writeln("<comment>$string</comment>");
+		if ($this->getVerbosity() >= $verbosiry)
+		{
+			parent::comment($string);
+		}
 	}
 
 	/**
 	 * Write a string as question output.
 	 *
 	 * @param  string  $string
+	 * @param  int 	   $verbosity
 	 * @return void
 	 */
-	protected function question($string)
+	protected function question($string, $verbosity = 1)
 	{
-		$this->output->writeln("<question>$string</question>");
+		if ($this->getVerbosity() >= $verbosiry)
+		{
+			parent::question($string);
+		}
 	}
 
 	/**
 	 * Write a string as error output.
 	 *
 	 * @param  string  $string
+	 * @param  int 	   $verbosity
 	 * @return void
 	 */
-	protected function error($string)
+	protected function error($string, $verbosity = 1)
 	{
-		$this->output->writeln("<error>$string</error>");
+		if ($this->getVerbosity() >= $verbosiry)
+		{
+			parent::error($string);
+		}
 	}
 
 	/**
-	 * Get the console command arguments.
+	 * We don't use laravel but some components, this will be called by our App
+	 * and we want to use $this->container instead of $this->laravel as to not
+	 * confuse people
 	 *
-	 * @return array
+	 * @param  Illuminate\Container\Container $container
+	 * @return void
 	 */
-	protected function getArguments()
+	public function setLaravel(Container $container)
 	{
-		return array();
+		$this->container = $container;
+		parent::setLaravel($container);
 	}
-
-	/**
-	 * Get the console command options.
-	 *
-	 * @return array
-	 */
-	protected function getOptions()
-	{
-		return array();
-	}
-
-	/**
-	 * Get the output implementation.
-	 *
-	 * @return Symfony\Component\Console\Output\OutputInterface
-	 */
-	public function getOutput()
-	{
-		return $this->output;
-	}
-
 }

@@ -1,8 +1,10 @@
 <?php
 
 use BigElephant\XfConsole\Application;
+use Illuminate\Container\Container;
+use Symfony\Component\Console\Output\ConsoleOutput
 
-$application = new Application('XenForo Developer', '0.1');
+$application = new Application(new Container);
 
 try 
 {
@@ -19,7 +21,7 @@ try
 }
 catch (Exception $e)
 {
-	$application->renderException($e, new Symfony\Component\Console\Output\ConsoleOutput);
+	$application->renderException($e, new ConsoleOutput);
 	exit;
 }
 
