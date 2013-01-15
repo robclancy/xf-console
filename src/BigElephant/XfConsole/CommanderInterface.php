@@ -1,8 +1,8 @@
 <?php namespace BigElephant\Console;
 
-use BigElephant\Console\Application;
+use BigElephant\Console\Application as ConsoleApp;
 
 interface CommanderInterface {
 
-	public function build(Application $consoleApp);
+	public function build(ConsoleApp $consoleApp);
 }
