@@ -11,7 +11,7 @@ class Application extends App {
 
 	public function __construct(Container $container)
 	{
-		parent::_construct('XenForo Developer', '0.1');
+		parent::__construct('XenForo Developer', '0.1');
 
 		$this->setContainer($container);
 	}
